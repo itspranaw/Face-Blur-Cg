@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Real-Time Face Blur</title>
+    <link rel="shortcut icon" type="x-icon" href="favicon.ico">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        body { background-color: #f3f4f6; }
+    </style>
+</head>
+<body class="flex items-center justify-center min-h-screen">
+    <div class="container mx-auto text-center">
+        <h1 class="text-4xl font-bold mb-4">Real-Time Face Blur</h1>
+        <div class="relative inline-block">
+            <img id="video" src="{{ url_for('video_feed') }}" class="border-2 border-gray-400 rounded-md" width="480" height="360">
+            <div id="overlay" class="absolute inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50 hidden">
+                <span class="text-white text-2xl">No Face Found!</span>
+            </div>
+        </div>
+        <div class="mt-4">
+            <button onclick="startStream()" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Start</button>
+            <button onclick="stopStream()" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">Stop</button>
+        </div>
+    </div>
+    <script>
+        function startStream() {
+            fetch('/start')
+                .then(response => response.text())
+                .then(data => console.log(data));
+            document.getElementById('video').src = "{{ url_for('video_feed') }}";
+        }
+
+        function stopStream() {
+            fetch('/stop')
+                .then(response => response.text())
+                .then(data => console.log(data));
+            document.getElementById('video').src = "";
+        }
+    </script>
+</body>
+</html>
