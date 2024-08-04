@@ -1,5 +1,13 @@
-1. Create and activate the virtual environment  
+1. `git clone https://github.com/itspranaw/Face-Blur-Cg.git`
 
-2. `pip install opencv-python opencv-python-headless flask`
+Create and activate the virtual environment:
+
+2. `python -m venv env`
+
+    `env\Scripts\activate`
+
+3. `cd Face-Blur-cg`
+
+5. `pip install opencv-python opencv-python-headless flask`
   
-4. `python app.py`
+6. `python app.py`
